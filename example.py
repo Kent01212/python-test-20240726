@@ -1,9 +1,9 @@
-import time
 import sys
+import time
 from doctest import testmod
 
 
-def trib(n):
+def trib(n, memo={}):
     """フィボナッチ数列を拡張した『トリボナッチ』数を返す
     args:
         n: 何番目のトリボナッチ数を求めるか
@@ -28,7 +28,15 @@ def trib(n):
     >>> trib(16)
     7473
     """
-    pass  # この行を消してから実装を入れてみましょう
+    # この行を消してから実装を入れてみましょう
+    if n in memo:
+        return memo[n]
+    if n == 0 or n == 1 or n == 2:
+        result = 1
+    else:
+        result = trib(n-1, memo) + trib(n-2, memo) + trib(n-3, memo)
+    memo[n] = result
+    return result
 
 
 # 単純に起動した場合にテストをする
